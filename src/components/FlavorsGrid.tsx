@@ -4,6 +4,7 @@ import { FLAVORS } from '../data/flavors';
 import { Flavor } from '../types';
 import { Card3D } from './Card3D';
 import { ProductVisual } from './ProductVisual';
+import { analytics } from '../lib/analytics';
 
 interface FlavorsGridProps {
   onAddToCart: (flavorId: string) => void;
@@ -23,6 +24,8 @@ export const FlavorsGrid: React.FC<FlavorsGridProps> = ({
   });
 
   const handleAddWithMicroInteraction = (flavorId: string) => {
+    const item = FLAVORS.find((f) => f.id === flavorId);
+    analytics.trackAddToCart(flavorId, item?.price || 45);
     setAddedAnimationId(flavorId);
     onAddToCart(flavorId);
     setTimeout(() => {
@@ -90,8 +93,10 @@ export const FlavorsGrid: React.FC<FlavorsGridProps> = ({
                 className="relative pt-6 group"
               >
                 <Card3D maxTilt={10} overflowVisible={true} className="h-full">
-                  {/* Outer Glass Container */}
-                  <div
+                  {/* Outer Glass Container with Schema.org microdata */}
+                  <article
+                    itemScope
+                    itemType="https://schema.org/Product"
                     className={`h-full rounded-3xl p-7 pt-4 flex flex-col justify-between relative transition-all duration-500 border overflow-visible ${
                       isEnergy
                         ? 'bg-black/15 hover:bg-black/25 backdrop-blur-[2px] border-cyan-400/50 shadow-[0_15px_35px_rgba(0,210,255,0.2)]'
@@ -169,13 +174,13 @@ export const FlavorsGrid: React.FC<FlavorsGridProps> = ({
                     >
                       <div className="mb-4">
                         <div className="flex items-baseline justify-between mb-1">
-                          <h3 className="font-heading text-2xl font-black text-white group-hover:text-white transition-colors flex items-center gap-2">
+                          <h3 itemProp="name" className="font-heading text-2xl font-black text-white group-hover:text-white transition-colors flex items-center gap-2">
                             {flavor.name}
                             {isEnergy && <Zap className="w-4 h-4 text-cyan-400 fill-cyan-400" />}
                           </h3>
                           <span className="text-xs text-gray-400 font-medium">{flavor.volume.split('/')[0]}</span>
                         </div>
-                        <p className="text-sm font-semibold text-[#FFB347] mb-1.5">{flavor.subtitle}</p>
+                        <p itemProp="description" className="text-sm font-semibold text-[#FFB347] mb-1.5">{flavor.subtitle}</p>
                         <p className="text-xs text-gray-300 line-clamp-2 leading-relaxed">
                           {flavor.tagline}
                         </p>
@@ -194,7 +199,15 @@ export const FlavorsGrid: React.FC<FlavorsGridProps> = ({
                       </div>
 
                       {/* Price & Add to Cart Button with Micro-Interaction */}
-                      <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-3">
+                      <div
+                        itemProp="offers"
+                        itemScope
+                        itemType="https://schema.org/Offer"
+                        className="pt-4 border-t border-white/10 flex items-center justify-between gap-3"
+                      >
+                        <meta itemProp="priceCurrency" content="MXN" />
+                        <meta itemProp="price" content={String(flavor.price)} />
+                        <link itemProp="availability" href="https://schema.org/InStock" />
                         <div>
                           <div className="flex items-baseline gap-1.5">
                             <span className="text-2xl font-black text-white">
@@ -236,7 +249,7 @@ export const FlavorsGrid: React.FC<FlavorsGridProps> = ({
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </article>
                 </Card3D>
               </div>
             );

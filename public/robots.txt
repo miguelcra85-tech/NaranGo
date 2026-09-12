@@ -1,0 +1,6 @@
+# Robots.txt for Naran Go E-commerce
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://narango.mx/sitemap.xml

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, Play, Sparkles, Droplets, ShieldCheck, Flame } from 'lucide-react';
 import { FLAVORS } from '../data/flavors';
 import { ProductVisual } from './ProductVisual';
+import { analytics } from '../lib/analytics';
 
 interface HeroProps {
   onExploreFlavors: () => void;
@@ -176,7 +177,10 @@ export const Hero: React.FC<HeroProps> = ({
               {/* Primary Gradient CTA */}
               <button
                 id="hero-cta-primary"
-                onClick={onExploreFlavors}
+                onClick={() => {
+                  analytics.trackCtaClick('hero_explore_flavors');
+                  onExploreFlavors();
+                }}
                 className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-[#FF6B00] via-[#FF8533] to-[#FFB347] text-white font-bold text-base flex items-center justify-center gap-3 shadow-[0_12px_35px_rgba(255,107,0,0.45)] hover:shadow-[0_16px_45px_rgba(255,107,0,0.65)] hover:scale-[1.03] transition-all duration-300 group cursor-pointer"
               >
                 <span>Explorar los 7 Sabores</span>
@@ -186,7 +190,10 @@ export const Hero: React.FC<HeroProps> = ({
               {/* Secondary Glass CTA */}
               <button
                 id="hero-cta-secondary"
-                onClick={onExploreProduct}
+                onClick={() => {
+                  analytics.trackCtaClick('hero_explore_product');
+                  onExploreProduct();
+                }}
                 className="w-full sm:w-auto px-7 py-4 rounded-full bg-white/10 hover:bg-white/15 border border-white/25 text-white font-semibold text-base backdrop-blur-xl flex items-center justify-center gap-2.5 transition-all duration-300 hover:border-white/40 cursor-pointer shadow-lg"
               >
                 <Sparkles className="w-4 h-4 text-[#FFB347]" />

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FLAVORS } from './data/flavors';
 import { CartItem, Flavor } from './types';
 import { Header } from './components/Header';
@@ -17,6 +17,39 @@ import { CartDrawer } from './components/CartDrawer';
 import { ScrubVideoBackground } from './components/ScrubVideoBackground';
 
 export default function App() {
+  // Asegurar que al entrar a / la vista comience siempre desde el encabezado principal
+  useEffect(() => {
+    // 1. Desactivar restauración automática de scroll del navegador
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    // 2. Limpiar cualquier fragmento (#mapa, #mapa-producto, etc.) de la URL al cargar
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+
+    // 3. Forzar posicionamiento en el encabezado principal (#main-header / #inicio)
+    const forceHeaderView = () => {
+      const header = document.getElementById('main-header') || document.getElementById('inicio');
+      if (header) {
+        header.scrollIntoView({ behavior: 'instant' as ScrollBehavior, block: 'start' });
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+    };
+
+    forceHeaderView();
+    const rafId = requestAnimationFrame(forceHeaderView);
+    const timer1 = setTimeout(forceHeaderView, 60);
+    const timer2 = setTimeout(forceHeaderView, 200);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
+
   // Initial cart with sample products for immediate visual fullness
   const [cartItems, setCartItems] = useState<CartItem[]>([
     { flavor: FLAVORS[0], quantity: 2 }, // Naran Go (Mango & Orange)

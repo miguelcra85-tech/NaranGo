@@ -202,7 +202,9 @@ export const ScrubVideoBackground: React.FC<ScrubVideoBackgroundProps> = ({
       {!canvasDrawn && (
         <img
           src={`${import.meta.env.BASE_URL}vimeo-poster.jpg`}
-          alt="Huerto Naran Go"
+          alt="Naran Go - Huertos costeros de cítricos y mangos para elaboración de bebidas artesanales"
+          loading="lazy"
+          decoding="async"
           className="fixed inset-0 w-full h-full object-cover object-center pointer-events-none"
           style={{
             position: 'fixed',

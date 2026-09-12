@@ -18,6 +18,7 @@ import {
 import confetti from 'canvas-confetti';
 import { CartItem } from '../types';
 import { ProductMap } from './ProductMap';
+import { analytics } from '../lib/analytics';
 
 interface PurchaseSectionProps {
   cartItems: CartItem[];
@@ -103,6 +104,10 @@ export const PurchaseSection: React.FC<PurchaseSectionProps> = ({
       const generatedId = `NG-${Math.floor(100000 + Math.random() * 900000)}`;
       setOrderId(generatedId);
       setOrderConfirmed(true);
+
+      // Track E-commerce Conversion KPI
+      const totalUnits = cartItems.reduce((acc, it) => acc + it.quantity, 0);
+      analytics.trackPurchaseCompleted(generatedId, total, totalUnits);
 
       // Trigger Luxury Celebration Confetti
       confetti({

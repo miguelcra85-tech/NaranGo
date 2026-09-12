@@ -41,7 +41,7 @@ export const Benefits: React.FC = () => {
           {/* Card 1 (Spans 7 cols on desktop) */}
           <div className="md:col-span-7">
             <Card3D maxTilt={7} className="h-full">
-              <div
+              <article
                 id="benefit-card-0"
                 className="h-full rounded-3xl p-8 sm:p-10 bg-black/10 hover:bg-black/20 backdrop-blur-[2px] border border-white/15 hover:border-[#FF6B00]/60 transition-all duration-500 shadow-[0_10px_35px_rgba(0,0,0,0.2)] group flex flex-col justify-between relative overflow-hidden"
               >
@@ -77,14 +77,14 @@ export const Benefits: React.FC = () => {
                   <span className="w-2 h-2 rounded-full bg-[#FF6B00]"></span>
                   <span>Sin concentrados industriales ni pulpas deshidratadas</span>
                 </div>
-              </div>
+              </article>
             </Card3D>
           </div>
 
           {/* Card 2 (Spans 5 cols on desktop) */}
           <div className="md:col-span-5">
             <Card3D maxTilt={7} className="h-full">
-              <div
+              <article
                 id="benefit-card-1"
                 className="h-full rounded-3xl p-8 sm:p-10 bg-black/10 hover:bg-black/20 backdrop-blur-[2px] border border-white/15 hover:border-[#FFB347]/60 transition-all duration-500 shadow-[0_10px_35px_rgba(0,0,0,0.2)] group flex flex-col justify-between relative overflow-hidden"
               >
@@ -117,14 +117,14 @@ export const Benefits: React.FC = () => {
                   <span className="w-2 h-2 rounded-full bg-[#FFB347]"></span>
                   <span>Apto para dietas keto y control glucémico</span>
                 </div>
-              </div>
+              </article>
             </Card3D>
           </div>
 
           {/* Card 3 (Spans 5 cols on desktop) */}
           <div className="md:col-span-5">
             <Card3D maxTilt={7} className="h-full">
-              <div
+              <article
                 id="benefit-card-2"
                 className="h-full rounded-3xl p-8 sm:p-10 bg-black/10 hover:bg-black/20 backdrop-blur-[2px] border border-white/15 hover:border-[#38EFA0]/60 transition-all duration-500 shadow-[0_10px_35px_rgba(0,0,0,0.2)] group flex flex-col justify-between relative overflow-hidden"
               >
@@ -157,14 +157,14 @@ export const Benefits: React.FC = () => {
                   <span className="w-2 h-2 rounded-full bg-[#38EFA0]"></span>
                   <span>Absorción celular inmediata post-entrenamiento</span>
                 </div>
-              </div>
+              </article>
             </Card3D>
           </div>
 
           {/* Card 4 (Spans 7 cols on desktop) */}
           <div className="md:col-span-7">
             <Card3D maxTilt={7} className="h-full">
-              <div
+              <article
                 id="benefit-card-3"
                 className="h-full rounded-3xl p-8 sm:p-10 bg-black/10 hover:bg-black/20 backdrop-blur-[2px] border border-white/15 hover:border-[#00D2FF]/60 transition-all duration-500 shadow-[0_10px_35px_rgba(0,0,0,0.2)] group flex flex-col justify-between relative overflow-hidden"
               >
@@ -197,7 +197,7 @@ export const Benefits: React.FC = () => {
                   <span className="w-2 h-2 rounded-full bg-[#00D2FF]"></span>
                   <span>Cero plástico de un solo uso en toda la cadena</span>
                 </div>
-              </div>
+              </article>
             </Card3D>
           </div>
         </div>

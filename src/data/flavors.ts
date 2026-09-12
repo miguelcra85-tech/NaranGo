@@ -37,7 +37,7 @@ export const FLAVORS: Flavor[] = [
     glowColor: 'rgba(255, 200, 55, 0.4)',
     glowHex: '#FFC837',
     accentColor: '#48BB78',
-    imageFile: './piña-go.png',
+    imageFile: './pina-go.png',
     notes: ['Piña jugosa', 'Agua de coco mineral', 'Burbujas finas'],
     ingredients: ['Agua pura de manantial', 'Extracto de piña costarricense', 'Agua de coco verde (25%)', 'Ácido cítrico natural', 'Zinc mineral'],
   },

@@ -92,7 +92,10 @@ export const ProductVisual: React.FC<ProductVisualProps> = ({
           <div className="relative group flex items-center justify-center">
             <img
               src={imageSrc}
-              alt={flavor.name}
+              alt={`${flavor.name} - Bebida tropical natural ${flavor.subtitle} en lata 355ml`}
+              loading={size === 'hero' ? 'eager' : 'lazy'}
+              decoding="async"
+              fetchPriority={size === 'hero' ? 'high' : 'auto'}
               referrerPolicy="no-referrer"
               onError={() => {
                 if (!triedFallback && flavor.id === 'pina-go') {

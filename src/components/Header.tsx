@@ -89,7 +89,7 @@ export const Header: React.FC<HeaderProps> = ({
         </a>
 
         {/* Center navigation links */}
-        <nav className="hidden md:flex items-center gap-1.5 lg:gap-2">
+        <nav aria-label="Navegación principal" className="hidden md:flex items-center gap-1.5 lg:gap-2">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (

@@ -26,11 +26,19 @@ export const ProductMap: React.FC<ProductMapProps> = ({
       style: maptilersdk.MapStyle.DATAVIZ.DARK, // Estilo limpio y elegante
       center: [-99.1332, 19.4326],
       zoom: 14,
-      navigationControl: 'top-right',
+      navigationControl: false, // Desactivar controles automáticos que puedan capturar foco
       geolocateControl: false,
+      keyboard: false, // Impide que el mapa capture foco por teclado o tabindex
+      scrollZoom: false, // Evita interferir con el scroll del usuario en la landing
     });
 
     mapInstanceRef.current = map;
+
+    // Asegurar que el contenedor no tenga foco
+    if (mapContainerRef.current) {
+      mapContainerRef.current.tabIndex = -1;
+      mapContainerRef.current.blur();
+    }
 
     // Crear la lata con transparencia
     const lataElement = document.createElement('div');
@@ -44,25 +52,29 @@ export const ProductMap: React.FC<ProductMapProps> = ({
     lataElement.style.cursor = 'pointer';
     lataElement.className = 'transition-transform duration-300 hover:scale-110 drop-shadow-[0_8px_16px_rgba(255,107,0,0.5)]';
 
-    // Añadir la lata al mapa
-    const popup = new maptilersdk.Popup({ offset: 28, closeButton: true })
-      .setHTML('<div style="text-align:center; padding: 2px;"><b style="color:#FFB347; font-size:13px; display:block; margin-bottom:2px;">Naran Go • Punto Central</b><span style="color:#fff; font-size:12px;">¡Encuentra nuestra lata aquí!</span></div>');
+    // Añadir la lata al mapa con popup (desactivando focusAfterOpen para evitar que el navegador haga scroll automático al mapa)
+    const popup = new maptilersdk.Popup({
+      offset: 28,
+      closeButton: true,
+      focusAfterOpen: false,
+    }).setHTML(
+      '<div style="text-align:center; padding: 2px;"><b style="color:#FFB347; font-size:13px; display:block; margin-bottom:2px;">Naran Go • Punto Central</b><span style="color:#fff; font-size:12px;">¡Encuentra nuestra lata aquí!</span></div>'
+    );
 
-    const mainMarker = new maptilersdk.Marker({ element: lataElement })
+    new maptilersdk.Marker({ element: lataElement })
       .setLngLat([-99.1332, 19.4326])
       .setPopup(popup)
       .addTo(map);
 
-    // Abrir popup automáticamente
-    setTimeout(() => {
-      mainMarker.togglePopup();
-    }, 600);
-
-    // Asegurar transparencia en el canvas WebGL para acoplarse a la landing
+    // Asegurar transparencia en el canvas WebGL para acoplarse a la landing sin capturar foco
     map.on('load', () => {
       const canvas = map.getCanvas();
       if (canvas) {
         canvas.style.backgroundColor = 'transparent';
+        canvas.removeAttribute('tabindex');
+        if (typeof canvas.blur === 'function') {
+          canvas.blur();
+        }
       }
       try {
         if (map.getLayer('background')) {

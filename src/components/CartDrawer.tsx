@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, ShoppingBag, Plus, Minus, Trash2, ArrowRight, Truck } from 'lucide-react';
 import { CartItem } from '../types';
+import { analytics } from '../lib/analytics';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -78,7 +79,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       {item.flavor.imageFile ? (
                         <img
                           src={item.flavor.imageFile}
-                          alt={item.flavor.name}
+                          alt={`${item.flavor.name} - Bebida tropical natural 355ml`}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-contain"
                         />
                       ) : (
@@ -148,6 +151,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               <button
                 id="drawer-checkout-btn"
                 onClick={() => {
+                  const totalUnits = cartItems.reduce((acc, it) => acc + it.quantity, 0);
+                  analytics.trackCheckoutStart(totalUnits, subtotal);
                   onClose();
                   onCheckout();
                 }}

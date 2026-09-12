@@ -3,6 +3,7 @@ import { CheckCircle2, Sparkles, Citrus, Droplet, Shield, Leaf, HeartHandshake }
 import { FLAVORS } from '../data/flavors';
 import { ProductVisual } from './ProductVisual';
 import { Card3D } from './Card3D';
+import { analytics } from '../lib/analytics';
 
 interface ProductSpotlightProps {
   onAddToCart: (flavorId: string) => void;
@@ -102,7 +103,10 @@ export const ProductSpotlight: React.FC<ProductSpotlightProps> = ({
                   </div>
                   <button
                     id="spotlight-add-btn"
-                    onClick={() => onAddToCart(flagship.id)}
+                    onClick={() => {
+                      analytics.trackAddToCart(flagship.id, flagship.price);
+                      onAddToCart(flagship.id);
+                    }}
                     className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#FF6B00] to-[#FF8533] text-white font-bold text-xs uppercase tracking-wider hover:shadow-[0_0_20px_rgba(255,107,0,0.5)] transition-all cursor-pointer"
                   >
                     Añadir al Carrito
