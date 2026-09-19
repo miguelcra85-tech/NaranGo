@@ -78,7 +78,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     >
                       {item.flavor.imageFile ? (
                         <img
-                          src={item.flavor.imageFile}
+                          src={item.flavor.imageFile.startsWith('/') ? `${import.meta.env.BASE_URL}${item.flavor.imageFile.slice(1)}` : item.flavor.imageFile}
                           alt={`${item.flavor.name} - Bebida tropical natural 355ml`}
                           loading="lazy"
                           decoding="async"

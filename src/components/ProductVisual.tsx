@@ -42,10 +42,15 @@ export const ProductVisual: React.FC<ProductVisualProps> = ({
   const particleParallaxY = -rotation.x * 2.6;
 
   // Determine current image source
-  const imageSrc =
+  const rawImageSrc =
     triedFallback && flavor.id === 'pina-go'
-      ? './pina-go.png'
+      ? '/pina-go.webp'
       : flavor.imageFile;
+  const imageSrc = rawImageSrc
+    ? rawImageSrc.startsWith('http')
+      ? rawImageSrc
+      : `${import.meta.env.BASE_URL}${rawImageSrc.replace(/^\.?\//, '')}`
+    : undefined;
 
   return (
     <div

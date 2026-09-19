@@ -278,7 +278,7 @@ export const PurchaseSection: React.FC<PurchaseSectionProps> = ({
                           >
                             {item.flavor.imageFile ? (
                               <img
-                                src={item.flavor.imageFile}
+                                src={item.flavor.imageFile.startsWith('/') ? `${import.meta.env.BASE_URL}${item.flavor.imageFile.slice(1)}` : item.flavor.imageFile}
                                 alt={item.flavor.name}
                                 className="w-full h-full object-contain"
                               />

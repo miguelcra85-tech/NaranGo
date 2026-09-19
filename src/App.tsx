@@ -138,7 +138,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-transparent text-[#F3F4F6] relative selection:bg-[#FF6B00] selection:text-white font-sans">
       {/* 0. Fixed Native Scrub / Scroll-driven Video Background with Fallback Frames Cache */}
-      <ScrubVideoBackground videoSrc="https://res.cloudinary.com/hw31kdln/video/upload/v1788758454/portada-huerto_namsyo.mp4" />
+      <ScrubVideoBackground videoSrc="https://hwpfvfhdszwojsfajgdz.supabase.co/storage/v1/object/public/material/Portada-Huerto-mejorado.mp4" />
 
       {/* 1. Fixed Header with glassmorphism & animated cart counter */}
       <Header

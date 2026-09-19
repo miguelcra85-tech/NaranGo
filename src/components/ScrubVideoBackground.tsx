@@ -4,12 +4,12 @@ interface ScrubVideoBackgroundProps {
   videoSrc?: string;
 }
 
-const CLOUDINARY_VIDEO_URL =
-  'https://res.cloudinary.com/hw31kdln/video/upload/v1788758454/portada-huerto_namsyo.mp4';
+const DEFAULT_VIDEO_URL =
+  'https://hwpfvfhdszwojsfajgdz.supabase.co/storage/v1/object/public/material/Portada-Huerto-mejorado.mp4';
 const TOTAL_FRAMES = 24;
 
 export const ScrubVideoBackground: React.FC<ScrubVideoBackgroundProps> = ({
-  videoSrc = CLOUDINARY_VIDEO_URL,
+  videoSrc = DEFAULT_VIDEO_URL,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -24,13 +24,13 @@ export const ScrubVideoBackground: React.FC<ScrubVideoBackgroundProps> = ({
   const targetProgressRef = useRef<number>(0);
   const currentProgressRef = useRef<number>(0);
 
-  // 1. Preload keyframes cache for canvas fallback
+  // 1. Preload keyframes cache for canvas fallback (optimized WebP format)
   useEffect(() => {
     const images: HTMLImageElement[] = [];
     for (let i = 1; i <= TOTAL_FRAMES; i++) {
       const img = new Image();
       const num = String(i).padStart(3, '0');
-      img.src = `${import.meta.env.BASE_URL}frames/frame_${num}.jpg`;
+      img.src = `${import.meta.env.BASE_URL}frames/frame_${num}.webp`;
       images.push(img);
     }
     frameImagesRef.current = images;
@@ -201,7 +201,7 @@ export const ScrubVideoBackground: React.FC<ScrubVideoBackgroundProps> = ({
       {/* 1. Static Poster backup (Lowest layer, z-index -3) */}
       {!canvasDrawn && (
         <img
-          src={`${import.meta.env.BASE_URL}vimeo-poster.jpg`}
+          src={`${import.meta.env.BASE_URL}vimeo-poster.webp`}
           alt="Naran Go - Huertos costeros de cítricos y mangos para elaboración de bebidas artesanales"
           loading="lazy"
           decoding="async"
