@@ -21,12 +21,12 @@ export const ProductVisual: React.FC<ProductVisualProps> = ({
   const [triedFallback, setTriedFallback] = useState(false);
   const isEnergy = flavor.id === 'blueberry-energy';
 
-  // Sizing heights for images - Blueberry Energy is given extra scale and height to fill the card
+  // Sizing heights for images - Blueberry Energy is given extra scale and height so droplets reach the card edges
   const sizeHeightClass = {
-    sm: isEnergy ? 'max-h-[220px]' : 'max-h-[200px]',
-    md: isEnergy ? 'max-h-[340px] sm:max-h-[360px]' : 'max-h-[290px]',
-    lg: isEnergy ? 'max-h-[420px]' : 'max-h-[360px]',
-    hero: 'max-h-[460px] sm:max-h-[520px]',
+    sm: isEnergy ? 'max-h-[250px]' : 'max-h-[200px]',
+    md: isEnergy ? 'max-h-[380px] sm:max-h-[420px]' : 'max-h-[290px]',
+    lg: isEnergy ? 'max-h-[480px]' : 'max-h-[360px]',
+    hero: 'max-h-[520px] sm:max-h-[580px]',
   }[size];
 
   // Parallax calculations: The bottle moves at a distinct rate from the card container
@@ -110,7 +110,7 @@ export const ProductVisual: React.FC<ProductVisualProps> = ({
                 }
               }}
               className={`${sizeHeightClass} w-auto object-contain pointer-events-none drop-shadow-[0_15px_25px_rgba(0,0,0,0.45)] ${
-                isEnergy ? 'scale-115 sm:scale-125 my-[-6px]' : ''
+                isEnergy ? 'scale-130 sm:scale-145 my-[-10px]' : ''
               }`}
               style={{
                 willChange: 'transform',
@@ -158,11 +158,22 @@ export const ProductVisual: React.FC<ProductVisualProps> = ({
           style={{ animationDuration: '4.8s' }}
         />
 
-        {/* Dynamic Energy Lightning Sparks or Fruit Splash Glow */}
+        {/* Dynamic Energy Lightning Sparks & Edge Water Droplets for BlueBerry */}
         {isEnergy ? (
-          <div className="absolute inset-0 pointer-events-none opacity-80">
-            <div className="absolute top-10 left-6 w-1.5 h-6 bg-cyan-300 rounded-full blur-[1px] shadow-[0_0_10px_#00D2FF] rotate-45 animate-pulse" />
-            <div className="absolute bottom-16 right-6 w-2 h-7 bg-blue-400 rounded-full blur-[1px] shadow-[0_0_12px_#3B82F6] -rotate-12 animate-pulse" />
+          <div className="absolute inset-0 pointer-events-none opacity-90">
+            {/* Left Edge Splash Water Droplets (reaching card perimeter) */}
+            <div className="absolute top-1/2 -left-4 w-3.5 h-3.5 rounded-full bg-cyan-200/90 blur-[0.3px] shadow-[0_0_14px_#00D2FF] animate-subtle-float" />
+            <div className="absolute top-1/3 -left-2 w-2.5 h-2.5 rounded-full bg-white/85 blur-[0.3px] shadow-[0_0_8px_white] animate-float-reverse" />
+            <div className="absolute bottom-1/4 -left-3 w-3 h-3 rounded-full bg-blue-300/80 blur-[0.4px] shadow-[0_0_10px_#3B82F6] animate-subtle-float" />
+
+            {/* Right Edge Splash Water Droplets (reaching card perimeter) */}
+            <div className="absolute top-1/2 -right-4 w-4 h-4 rounded-full bg-cyan-200/90 blur-[0.3px] shadow-[0_0_16px_#00D2FF] animate-subtle-float" />
+            <div className="absolute top-1/3 -right-2 w-2.5 h-2.5 rounded-full bg-white/90 blur-[0.3px] shadow-[0_0_10px_white] animate-float-reverse" />
+            <div className="absolute bottom-1/4 -right-3 w-3 h-3 rounded-full bg-blue-400/80 blur-[0.4px] shadow-[0_0_12px_#3B82F6] animate-subtle-float" />
+
+            {/* Lightning Sparks */}
+            <div className="absolute top-8 left-3 w-1.5 h-7 bg-cyan-300 rounded-full blur-[1px] shadow-[0_0_10px_#00D2FF] rotate-45 animate-pulse" />
+            <div className="absolute bottom-14 right-3 w-2 h-8 bg-blue-400 rounded-full blur-[1px] shadow-[0_0_12px_#3B82F6] -rotate-12 animate-pulse" />
           </div>
         ) : (
           <div

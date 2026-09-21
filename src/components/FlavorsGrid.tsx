@@ -158,7 +158,7 @@ export const FlavorsGrid: React.FC<FlavorsGridProps> = ({
 
                     {/* Center: Interactive Product Visual with Pop-out & Multi-Plane Parallax */}
                     <div className={`py-2 flex items-center justify-center relative overflow-visible ${
-                      isEnergy ? 'min-h-[320px] -my-4' : 'min-h-[300px] -my-6'
+                      isEnergy ? 'min-h-[350px] -my-2' : 'min-h-[300px] -my-6'
                     }`}>
                       <ProductVisual
                         flavor={flavor}

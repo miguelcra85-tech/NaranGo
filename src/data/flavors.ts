@@ -131,7 +131,7 @@ export const FLAVORS: Flavor[] = [
     originalPrice: 55,
     calories: 28,
     volume: '355ml / 12 fl oz',
-    badge: '⚡ Electric Energy',
+    badge: '#2 Bestseller ⚡',
     color: '#00D2FF',
     glowColor: 'rgba(0, 210, 255, 0.65)',
     glowHex: '#3B82F6',
